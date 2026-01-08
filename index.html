@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Shehab Saber</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- ========================================
+         HOME SECTION - Hero & Navigation
+         ======================================== -->
+    <section class="home" id="home">
+      <!-- Navigation Bar -->
+      <nav id="navbar">
+        <h2>Deve<span>loper</span></h2>
+
+        <!-- Navigation Links -->
+        <ul id="action">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#skills">Skills</a></li>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+      <!-- End Navigation Bar -->
+
+      <!-- Hero Content -->
+      <div class="content">
+        <!-- Hero Text -->
+        <div class="container-texts">
+          <h4>Hello, My name is</h4>
+          <h1>Shehab <span>Saber</span></h1>
+          <h3>
+            I'm a <span>Flutter Developer</span>
+            Creating cross-platform mobile apps with Flutter and exploring
+            machine learning.
+          </h3>
+
+          <!-- CV Download Button - Update href with your CV path -->
+          <a
+            href="assets/Shehab_Saber_CV.pdf"
+            class="btn"
+            download="Shehab_Saber_CV.pdf"
+            >Download CV</a
+          >
+
+          <!-- Social Media Links - Update href with your actual links -->
+          <div class="social">
+            <a
+              href="https://github.com/shehabs-dev"
+              target="_blank"
+              aria-label="GitHub"
+            >
+              <img src="img/icons/github.png" alt="GitHub" class="img_1" />
+            </a>
+            <a
+              href="https://linkedin.com/in/shehab-saber-a78746355"
+              target="_blank"
+              aria-label="LinkedIn"
+            >
+              <img src="img/icons/linked.png" alt="LinkedIn" class="img_1" />
+            </a>
+          </div>
+        </div>
+        <!-- End Hero Text -->
+
+        <!-- Hero Image -->
+        <div class="container-img">
+          <img
+            src="img/wev developer.png"
+            alt="Developer illustration"
+            class="shape"
+          />
+        </div>
+        <!-- End Hero Image -->
+      </div>
+      <!-- End Hero Content -->
+    </section>
+    <!-- ========================================
+         END HOME SECTION
+         ======================================== -->
+
+    <!-- ========================================
+         ABOUT SECTION - About Me Information
+         ======================================== -->
+    <section class="about" id="about">
+      <div class="content">
+        <!-- About Image -->
+        <div class="container-img">
+          <img src="img/Programming-amico.png" alt="Programming illustration" />
+        </div>
+        <!-- End About Image -->
+
+        <!-- About Text -->
+        <div class="container-texts">
+          <h1>About <span>Me</span></h1>
+          <h5>Flutter Developer</h5>
+          <p>
+            Hello! My name is Shehab Saber. I am a
+            <strong>Flutter Developer</strong> focused on building clean,
+            scalable, and maintainable cross-platform mobile applications.
+            <br /><br />
+            I specialize in
+            <strong>Flutter, Dart, BLoC state management</strong>, and
+            <strong>Firebase</strong>, with experience designing responsive UIs
+            and implementing real-time features. <br /><br />
+            In addition to mobile development, I have foundational knowledge of
+            <strong>HTML, CSS, and Python</strong>, and hands-on experience with
+            basic <strong>machine learning concepts</strong> using NumPy,
+            Pandas, and scikit-learn for data analysis projects. <br /><br />
+            I am currently a university student at
+            <strong>Assiut University</strong>, studying Public Policy and
+            Information Systems, and I have completed professional IT training
+            certified by the Egyptian Ministry of Communications.
+          </p>
+        </div>
+        <!-- End About Text -->
+      </div>
+    </section>
+    <!-- ========================================
+         END ABOUT SECTION
+         ======================================== -->
+
+    <!-- ========================================
+         PROJECTS SECTION - Portfolio Projects
+         ======================================== -->
+    <section class="projects" id="projects">
+      <h1 class="name text-center">Recent <span>Projects</span></h1>
+
+      <div class="projects-grid">
+        <!-- Project Card 1 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="img/projects/p_1.png" alt="Project 1" />
+            <div class="project-overlay">
+              <!-- Update href with project link (GitHub, app store, etc.) -->
+              <a
+                href="https://github.com/shehabs-dev/flutter-map-app"
+                class="project-link"
+                >View Details</a
+              >
+            </div>
+          </div>
+          <div class="project-info">
+            <!-- Update with your actual project info -->
+            <h3>MyMap</h3>
+            <p>
+              A lightweight Flutter map viewer with live device location
+              tracking, place search, and marker management. Built with
+              flutter_map and integrated with Geoapify for autocomplete search.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Flutter</span>
+              <span class="tag">Dart</span>
+              <span class="tag">Geolocation</span>
+            </div>
+          </div>
+        </div>
+        <!-- End Project Card 1 -->
+
+        <!-- Project Card 2 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="img/projects/p_2.png" alt="Project 2" />
+            <div class="project-overlay">
+              <!-- Update href with project link -->
+              <a
+                href="https://github.com/shehabs-dev/car-price-prediction-ml"
+                class="project-link"
+                >View Details</a
+              >
+            </div>
+          </div>
+          <div class="project-info">
+            <!-- Update with your actual project info -->
+            <h3>Car Price Prediction</h3>
+            <p>
+              An interactive Streamlit app and ML notebook for predicting used
+              car prices with scikit-learn, showing exploratory data analysis
+              (EDA), feature engineering, and a trained model for real-time
+              price estimates.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Streamlit</span>
+            </div>
+          </div>
+        </div>
+        <!-- End Project Card 2 -->
+
+        <!-- Project Card 3 -->
+
+        <!-- End Project Card 3 -->
+
+        <!-- Add more project cards here following the same structure -->
+      </div>
+    </section>
+    <!-- ========================================
+         END PROJECTS SECTION
+         ======================================== -->
+
+    <!-- ========================================
+         SERVICES SECTION - What I Offer
+         ======================================== -->
+    <section class="services" id="services">
+      <h1 class="name text-center">My <span>Services</span></h1>
+
+      <div class="box">
+        <!-- Service Card 1 -->
+        <div class="card">
+          <em class="fas fa-mobile-alt"></em>
+          <h5>Mobile App Development</h5>
+          <div class="par">
+            Developing <strong>cross-platform mobile applications</strong> with
+            responsive UI, clean architecture, and state management using BLoC.
+          </div>
+        </div>
+        <!-- End Service Card 1 -->
+
+        <!-- Service Card 2 -->
+        <div class="card">
+          <em class="far fa-file-code"></em>
+          <h5>Firebase Integration</h5>
+          <div class="par">
+            Implementing
+            <strong>
+              Firebase authentication, Firestore, and real-time database
+              solutions
+            </strong>
+            for mobile apps.
+          </div>
+        </div>
+        <!-- End Service Card 2 -->
+
+        <!-- Service Card 3 -->
+        <div class="card">
+          <em class="fas fa-brain"></em>
+          <h5>Introductory ML & Python</h5>
+          <div class="par">
+            Basic data analysis and experimentation with machine learning
+            concepts.
+          </div>
+        </div>
+        <!-- End Service Card 3 -->
+
+        <!-- Service Card 4 -->
+        <div class="card">
+          <em class="fas fa-code"></em>
+          <h5>Web Basics (HTML & CSS)</h5>
+          <div class="par">
+            Supporting mobile applications with basic web technologies,
+            including HTML and CSS, for simple landing pages and dashboards.
+          </div>
+        </div>
+        <!-- End Service Card 4 -->
+
+        <!-- Add more service cards here following the same structure -->
+      </div>
+    </section>
+    <!-- ========================================
+         END SERVICES SECTION
+         ======================================== -->
+
+    <!-- ========================================
+         SKILLS SECTION - Technical Skills
+         ======================================== -->
+    <section class="skills" id="skills">
+      <div class="content">
+        <!-- Skills Content -->
+        <div class="container-texts">
+          <h1><span>My</span> Skills</h1>
+
+          <!-- Skills Icons Grid -->
+          <div class="content-skills">
+            <!-- Add or remove skill icons here -->
+            <div class="skill-item">
+              <img class="skill" src="img/icons/flutter.png" alt="Flutter" />
+              <p class="skill-name">Flutter</p>
+            </div>
+
+            <div class="skill-item">
+              <img class="skill" src="img/icons/dart2.png" alt="Dart" />
+              <p class="skill-name">Dart</p>
+            </div>
+
+            <div class="skill-item">
+              <img class="skill" src="img/icons/bloc.png" alt="BloC" />
+              <p class="skill-name">BLoC</p>
+            </div>
+
+            <div class="skill-item">
+              <img class="skill" src="img/icons/firebase.png" alt="Firebase" />
+              <p class="skill-name">Firebase</p>
+            </div>
+
+            <div class="skill-item">
+              <img class="skill" src="img/icons/python.png" alt="Python" />
+              <p class="skill-name">Python</p>
+            </div>
+
+            <div class="skill-item">
+              <img class="skill" src="img/icons/html.png" alt="HTML" />
+              <p class="skill-name">HTML</p>
+            </div>
+
+            <div class="skill-item">
+              <img class="skill" src="img/icons/css.png" alt="CSS" />
+              <p class="skill-name">CSS</p>
+            </div>
+
+            <div class="skill-item">
+              <img class="skill" src="img/icons/mysql.png" alt="MySQL" />
+              <p class="skill-name">MySQL</p>
+            </div>
+          </div>
+          <!-- End Skills Icons Grid -->
+        </div>
+        <!-- End Skills Content -->
+
+        <!-- Skills Image -->
+        <div class="container-img">
+          <img src="img/Notebook-bro.png" alt="Notebook illustration" />
+        </div>
+        <!-- End Skills Image -->
+      </div>
+    </section>
+    <!-- ========================================
+         END SKILLS SECTION
+         ======================================== -->
+
+    <!-- ========================================
+         FOOTER - Contact Information
+         ======================================== -->
+    <footer>
+      <div class="container-footer">
+        <h2>Shehab <span>Saber</span></h2>
+        <p>
+          Looking to make your app idea real?
+          <br />
+          <!-- Update with your contact info -->
+          Contact me: +20 1116501265
+        </p>
+        <p class="end">Copyright © 2026 Shehab Saber. All rights reserved.</p>
+      </div>
+    </footer>
+    <!-- ========================================
+         END FOOTER
+         ======================================== -->
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
