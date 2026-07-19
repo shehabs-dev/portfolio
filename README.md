@@ -21,6 +21,5 @@ This repository contains the source code for my portfolio website. Feel free to 
 
 ---
 
-© 2026 Shehab Saber. All rights reserved.  
 Connect with me on [LinkedIn](https://linkedin.com/in/shehab-saber-a78746355) or via email at shehab.saber.dev@gmail.com.
 

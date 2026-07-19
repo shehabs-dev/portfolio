@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin • Shehab Saber Portfolio</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body class="admin-body">
+    <!-- Toast container (top-right notifications) -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ========================================
+         LOGIN VIEW - shown when signed out
+         ======================================== -->
+    <div id="login-view" class="admin-panel admin-panel--centered">
+      <div class="admin-card login-card">
+        <div class="login-logo">
+          <i class="fas fa-mobile-screen-button"></i>
+        </div>
+        <h1>Admin Login</h1>
+        <p class="admin-sub">Sign in to manage your portfolio.</p>
+
+        <form id="login-form">
+          <label for="email">Email</label>
+          <input type="email" id="email" required autocomplete="username" />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" required autocomplete="current-password" />
+
+          <button type="submit" class="btn btn-block">
+            <i class="fas fa-right-to-bracket"></i> Sign In
+          </button>
+        </form>
+
+        <p id="login-error" class="admin-error"></p>
+
+        <p class="admin-hint">
+          Not set up yet? See <code>admin/README.md</code> in the repo for
+          one-time Firebase setup instructions.
+        </p>
+      </div>
+    </div>
+    <!-- End Login View -->
+
+    <!-- ========================================
+         DASHBOARD VIEW - shown when signed in
+         ======================================== -->
+    <div id="dashboard-view" class="dashboard" style="display: none">
+      <!-- Top bar -->
+      <header class="topbar">
+        <div class="topbar-brand">
+          <i class="fas fa-mobile-screen-button"></i>
+          <span>Portfolio Admin</span>
+        </div>
+
+        <div class="topbar-stats">
+          <div class="stat-pill">
+            <i class="fas fa-layer-group"></i>
+            <span id="stat-count">–</span> projects
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="../index.html" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fas fa-arrow-up-right-from-square"></i> View Site
+          </a>
+          <button id="logout-btn" class="btn btn-outline btn-sm">
+            <i class="fas fa-right-from-bracket"></i> Sign Out
+          </button>
+        </div>
+      </header>
+
+      <nav class="admin-tabs">
+        <a href="index.html" class="admin-tab active">
+          <i class="fas fa-layer-group"></i> Projects
+        </a>
+        <a href="settings.html" class="admin-tab">
+          <i class="fas fa-sliders"></i> Site Content
+        </a>
+      </nav>
+
+      <main class="dashboard-grid">
+        <!-- ============ LEFT: FORM + LIVE PREVIEW ============ -->
+        <section class="dashboard-col">
+          <div class="admin-card">
+            <div class="card-head">
+              <h2 id="form-title"><i class="fas fa-plus"></i> Add a Project</h2>
+            </div>
+
+            <form id="project-form">
+              <input type="hidden" id="project-id" />
+
+              <label for="title">Title</label>
+              <input type="text" id="title" required placeholder="e.g. PlantDoctor" />
+
+              <label for="description">
+                Description
+                <span class="char-counter" id="desc-counter">0 / 140</span>
+              </label>
+              <textarea
+                id="description"
+                rows="3"
+                required
+                maxlength="220"
+                placeholder="1-2 sentences. Cards are small — keep it tight."
+              ></textarea>
+
+              <label for="image-url-input">Project image</label>
+
+              <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Upload project image">
+                <input type="file" id="image-file-input" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+                <div id="dropzone-idle" class="dropzone-idle">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <p><strong>Click to upload</strong> or drag an image here</p>
+                  <span class="field-hint-inline">PNG, JPG or WEBP — up to 8MB</span>
+                  <span class="field-hint-inline">Best fit: 800×500px (16:10) — other sizes are letterboxed, not cropped</span>
+                </div>
+                <div id="dropzone-progress" class="dropzone-progress" style="display: none">
+                  <div class="spinner"></div>
+                  <span id="dropzone-progress-text">Uploading…</span>
+                </div>
+                <div id="image-preview" class="image-preview" style="display: none">
+                  <img id="image-preview-img" alt="Project image preview" />
+                  <button type="button" id="image-remove-btn" class="image-remove-btn" aria-label="Remove image" title="Remove image">
+                    <i class="fas fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+              <p id="image-fit-badge" class="image-fit-badge" style="display: none"></p>
+              <p id="dropzone-error" class="admin-error" style="display: none"></p>
+
+              <input type="hidden" id="image" />
+
+              <button type="button" id="toggle-url-mode-btn" class="link-btn">
+                <i class="fas fa-link"></i> Paste an image URL instead
+              </button>
+              <div id="image-url-wrap" class="image-url-wrap" style="display: none">
+                <input
+                  type="text"
+                  id="image-url-input"
+                  placeholder="https://example.com/image.png  or  assets/images/projects/your-image.png"
+                />
+                <p class="field-hint">
+                  Paste any public image URL, or a path already in
+                  <code>assets/images/projects/</code>.
+                </p>
+              </div>
+
+              <label for="tag-input">Tags <span class="field-hint-inline">(press Enter or comma to add, max 5)</span></label>
+              <div class="tag-input-wrap" id="tag-input-wrap">
+                <div class="tag-chips" id="tag-chips"></div>
+                <input type="text" id="tag-input" placeholder="Flutter, Firebase…" />
+              </div>
+
+              <label for="link">Repository / demo link</label>
+              <input type="url" id="link" required placeholder="https://github.com/..." />
+
+              <div class="form-actions">
+                <button type="submit" class="btn">
+                  <i class="fas fa-floppy-disk"></i> Save Project
+                </button>
+                <button type="button" id="cancel-edit-btn" class="btn btn-outline" style="display: none">
+                  Cancel Edit
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ============ RIGHT: PROJECT LIST ============ -->
+        <section class="dashboard-col">
+          <div class="admin-card">
+            <div class="card-head">
+              <h2><i class="fas fa-list"></i> Current Projects</h2>
+            </div>
+
+            <div class="search-wrap">
+              <i class="fas fa-magnifying-glass"></i>
+              <input type="text" id="search-input" placeholder="Search projects…" />
+            </div>
+
+            <div id="projects-list" class="admin-projects-list">
+              <p class="admin-hint">Loading…</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <!-- End Dashboard View -->
+
+    <!-- Delete confirmation modal -->
+    <div id="confirm-modal" class="modal-overlay" style="display: none">
+      <div class="modal-box">
+        <div class="modal-icon"><i class="fas fa-triangle-exclamation"></i></div>
+        <h3>Delete this project?</h3>
+        <p id="confirm-modal-text">This can't be undone.</p>
+        <div class="modal-actions">
+          <button id="confirm-cancel-btn" class="btn btn-outline">Cancel</button>
+          <button id="confirm-delete-btn" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firebase SDKs (compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

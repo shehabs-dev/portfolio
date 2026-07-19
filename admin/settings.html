@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Site Content • Admin • Shehab Saber Portfolio</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body class="admin-body">
+    <!-- Toast container (top-right notifications) -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ========================================
+         LOGIN VIEW - shown when signed out
+         ======================================== -->
+    <div id="login-view" class="admin-panel admin-panel--centered">
+      <div class="admin-card login-card">
+        <div class="login-logo">
+          <i class="fas fa-mobile-screen-button"></i>
+        </div>
+        <h1>Admin Login</h1>
+        <p class="admin-sub">Sign in to manage your portfolio.</p>
+
+        <form id="login-form">
+          <label for="email">Email</label>
+          <input type="email" id="email" required autocomplete="username" />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" required autocomplete="current-password" />
+
+          <button type="submit" class="btn btn-block">
+            <i class="fas fa-right-to-bracket"></i> Sign In
+          </button>
+        </form>
+
+        <p id="login-error" class="admin-error"></p>
+
+        <p class="admin-hint">
+          Not set up yet? See <code>admin/README.md</code> in the repo for
+          one-time Firebase setup instructions.
+        </p>
+      </div>
+    </div>
+    <!-- End Login View -->
+
+    <!-- ========================================
+         DASHBOARD VIEW - shown when signed in
+         ======================================== -->
+    <div id="dashboard-view" class="dashboard" style="display: none">
+      <!-- Top bar -->
+      <header class="topbar">
+        <div class="topbar-brand">
+          <i class="fas fa-mobile-screen-button"></i>
+          <span>Portfolio Admin</span>
+        </div>
+
+        <div class="topbar-stats">
+          <div class="stat-pill">
+            <i class="fas fa-clock"></i>
+            <span id="stat-updated">–</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="../index.html" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fas fa-arrow-up-right-from-square"></i> View Site
+          </a>
+          <button id="logout-btn" class="btn btn-outline btn-sm">
+            <i class="fas fa-right-from-bracket"></i> Sign Out
+          </button>
+        </div>
+      </header>
+
+      <nav class="admin-tabs">
+        <a href="index.html" class="admin-tab">
+          <i class="fas fa-layer-group"></i> Projects
+        </a>
+        <a href="settings.html" class="admin-tab active">
+          <i class="fas fa-sliders"></i> Site Content
+        </a>
+      </nav>
+
+      <!-- ============ SECTION NAV (Hero / Skills) ============ -->
+      <div class="settings-subnav" id="settings-subnav">
+        <button type="button" class="settings-subnav-btn active" data-target="hero-panel">
+          <i class="fas fa-house"></i> Hero
+        </button>
+        <button type="button" class="settings-subnav-btn" data-target="skills-panel">
+          <i class="fas fa-star"></i> Skills
+        </button>
+      </div>
+
+      <!-- ============ HERO PANEL ============ -->
+      <div class="settings-panel" id="hero-panel">
+        <main class="dashboard-grid">
+          <!-- LEFT: HERO FORM -->
+          <section class="dashboard-col">
+            <div class="admin-card">
+              <div class="card-head">
+                <h2><i class="fas fa-house"></i> Hero Section</h2>
+                <span class="card-head-hint">The first thing visitors see</span>
+              </div>
+
+              <form id="hero-form">
+                <label for="hero-title-input">Title</label>
+                <input
+                  type="text"
+                  id="hero-title-input"
+                  required
+                  placeholder="e.g. Flutter Developer."
+                />
+                <p class="field-hint">
+                  Shown in accent color, right after your name.
+                </p>
+
+                <label for="hero-description-input">
+                  Description
+                  <span class="char-counter" id="hero-desc-counter">0 / 160</span>
+                </label>
+                <textarea
+                  id="hero-description-input"
+                  rows="3"
+                  required
+                  maxlength="200"
+                  placeholder="One or two sentences. This is your one-line pitch."
+                ></textarea>
+
+                <label for="hero-image-url-input">Hero image</label>
+
+                <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Upload hero image">
+                  <input type="file" id="image-file-input" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+                  <div id="dropzone-idle" class="dropzone-idle">
+                    <i class="fas fa-cloud-arrow-up"></i>
+                    <p><strong>Click to upload</strong> or drag an image here</p>
+                    <span class="field-hint-inline">PNG, JPG or WEBP — up to 8MB</span>
+                    <span class="field-hint-inline">Best fit: 1500×1310px — smaller images will look blurry on modern screens</span>
+                  </div>
+                  <div id="dropzone-progress" class="dropzone-progress" style="display: none">
+                    <div class="spinner"></div>
+                    <span id="dropzone-progress-text">Uploading…</span>
+                  </div>
+                  <div id="image-preview" class="image-preview" style="display: none">
+                    <img id="image-preview-img" alt="Hero image preview" />
+                    <button type="button" id="image-remove-btn" class="image-remove-btn" aria-label="Remove image" title="Remove image">
+                      <i class="fas fa-xmark"></i>
+                    </button>
+                  </div>
+                </div>
+                <p id="image-fit-badge" class="image-fit-badge" style="display: none"></p>
+                <p id="dropzone-error" class="admin-error" style="display: none"></p>
+
+                <input type="hidden" id="hero-image" />
+
+                <button type="button" id="toggle-url-mode-btn" class="link-btn">
+                  <i class="fas fa-link"></i> Paste an image URL instead
+                </button>
+                <div id="image-url-wrap" class="image-url-wrap" style="display: none">
+                  <input
+                    type="text"
+                    id="hero-image-url-input"
+                    placeholder="https://example.com/image.png  or  assets/images/illustrations/your-image.png"
+                  />
+                  <p class="field-hint">
+                    Paste any public image URL, or a path already in
+                    <code>assets/images/illustrations/</code>.
+                  </p>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn">
+                    <i class="fas fa-floppy-disk"></i> Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <!-- RIGHT: ABOUT THIS PAGE -->
+          <section class="dashboard-col">
+            <div class="admin-card admin-card--muted">
+              <div class="card-head">
+                <h2><i class="fas fa-circle-info"></i> About This Page</h2>
+              </div>
+              <p class="admin-hint">
+                This controls the hero title, description, and photo at the
+                top of your site, plus the Skills section (next tab). Other
+                sections (About, Focus, Footer) aren't wired up here on
+                purpose — they change rarely, and editing them directly in
+                <code>index.html</code> keeps their wording exactly as
+                written.
+              </p>
+            </div>
+          </section>
+        </main>
+      </div>
+      <!-- End Hero Panel -->
+
+      <!-- ============ SKILLS PANEL ============ -->
+      <div class="settings-panel" id="skills-panel" style="display: none">
+        <main class="dashboard-grid">
+          <!-- LEFT: ADD SKILL FORM -->
+          <section class="dashboard-col">
+            <div class="admin-card">
+              <div class="card-head">
+                <h2 id="skill-form-title"><i class="fas fa-plus"></i> Add a Skill</h2>
+              </div>
+
+              <form id="skill-form">
+                <input type="hidden" id="skill-id" />
+
+                <label for="skill-name">Skill name</label>
+                <input type="text" id="skill-name" required placeholder="e.g. Python" />
+
+                <label>Group</label>
+                <div class="segmented" id="skill-group-toggle">
+                  <button type="button" class="segmented-btn active" data-group="main">
+                    <i class="fas fa-star"></i> Main Skills
+                  </button>
+                  <button type="button" class="segmented-btn" data-group="additional">
+                    <i class="fas fa-plus-circle"></i> Additional Skills
+                  </button>
+                </div>
+                <p class="field-hint">
+                  Main Skills are your core stack (e.g. Flutter, Dart, BLoC,
+                  Firebase, Cloudinary). Additional Skills are tools you also
+                  know (e.g. Python, Jupyter Notebook, HTML, CSS).
+                </p>
+                <input type="hidden" id="skill-group" value="main" />
+
+                <label for="skill-icon-url-input">Icon</label>
+
+                <div id="icon-dropzone" class="dropzone dropzone--icon" tabindex="0" role="button" aria-label="Upload skill icon">
+                  <input type="file" id="icon-file-input" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden />
+                  <div id="icon-dropzone-idle" class="dropzone-idle">
+                    <i class="fas fa-cloud-arrow-up"></i>
+                    <p><strong>Click to upload</strong> or drag an icon here</p>
+                    <span class="field-hint-inline">PNG, JPG, WEBP or SVG — up to 2MB</span>
+                    <span class="field-hint-inline">Best fit: square, at least 128×128px (256×256px looks crisp on all screens)</span>
+                  </div>
+                  <div id="icon-dropzone-progress" class="dropzone-progress" style="display: none">
+                    <div class="spinner"></div>
+                    <span id="icon-dropzone-progress-text">Uploading…</span>
+                  </div>
+                  <div id="icon-preview" class="icon-preview" style="display: none">
+                    <img id="icon-preview-img" alt="Skill icon preview" />
+                    <button type="button" id="icon-remove-btn" class="image-remove-btn" aria-label="Remove icon" title="Remove icon">
+                      <i class="fas fa-xmark"></i>
+                    </button>
+                  </div>
+                </div>
+                <p id="icon-dropzone-error" class="admin-error" style="display: none"></p>
+
+                <input type="hidden" id="skill-icon" />
+
+                <button type="button" id="toggle-icon-url-mode-btn" class="link-btn">
+                  <i class="fas fa-link"></i> Paste an icon URL instead
+                </button>
+                <div id="icon-url-wrap" class="image-url-wrap" style="display: none">
+                  <input
+                    type="text"
+                    id="skill-icon-url-input"
+                    placeholder="https://example.com/icon.png  or  assets/images/icons/your-icon.png"
+                  />
+                  <p class="field-hint">
+                    Paste any public icon URL, or a path already in
+                    <code>assets/images/icons/</code>.
+                  </p>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn">
+                    <i class="fas fa-floppy-disk"></i> Save Skill
+                  </button>
+                  <button type="button" id="cancel-skill-edit-btn" class="btn btn-outline" style="display: none">
+                    Cancel Edit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <!-- RIGHT: SKILLS LISTS -->
+          <section class="dashboard-col">
+            <div class="admin-card">
+              <div class="card-head">
+                <h2><i class="fas fa-star"></i> Main Skills</h2>
+                <span class="card-head-hint" id="main-skills-count">0 skills</span>
+              </div>
+              <div id="main-skills-list" class="admin-skills-list">
+                <p class="admin-hint">Loading…</p>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="card-head">
+                <h2><i class="fas fa-plus-circle"></i> Additional Skills</h2>
+                <span class="card-head-hint" id="additional-skills-count">0 skills</span>
+              </div>
+              <div id="additional-skills-list" class="admin-skills-list">
+                <p class="admin-hint">Loading…</p>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+      <!-- End Skills Panel -->
+    </div>
+    <!-- End Dashboard View -->
+
+    <!-- Delete skill confirmation modal -->
+    <div id="confirm-skill-modal" class="modal-overlay" style="display: none">
+      <div class="modal-box">
+        <div class="modal-icon"><i class="fas fa-triangle-exclamation"></i></div>
+        <h3>Delete this skill?</h3>
+        <p id="confirm-skill-modal-text">This can't be undone.</p>
+        <div class="modal-actions">
+          <button id="confirm-skill-cancel-btn" class="btn btn-outline">Cancel</button>
+          <button id="confirm-skill-delete-btn" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firebase SDKs (compat build) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="settings.js"></script>
+  </body>
+</html>
