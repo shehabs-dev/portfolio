@@ -17,7 +17,7 @@ Check out the live version of my portfolio here:
 - Showcases my personal projects and skills
 
 ## 📌 About
-This repository contains the source code for my portfolio website. Feel free to explore and see how the site is structured!
+This repository contains the source code for my portfolio website. Feel free to explore and see how the site is structured! 
 
 ---
 
